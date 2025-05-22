@@ -21,6 +21,20 @@ func main() {
 		fmt.Printf("Element %d found at index: %d\n", 21, index)
 	}
 
+	ele := Get(arr, 5)
+	fmt.Printf("Element %d found at index 5\n", ele)
+
+	Set(arr, 5, 19)
+
+	ele = Get(arr, 5)
+	fmt.Printf("Element %d found at index 5\n", ele)
+
+	ele = Max(arr)
+	fmt.Printf("Element %d is max in array %v\n", ele, arr)
+
+	avg := Avg(arr)
+	fmt.Printf("Avg of array %v is %v\n", arr, avg)
+
 	sort.Ints(arr)
 
 	fmt.Println(arr)
@@ -52,6 +66,38 @@ func main() {
 	} else {
 		fmt.Printf("Element %d found at index: %d\n", 15, index)
 	}
+}
+
+func Get(arr []int, index int) int {
+	if index < 0 || index >= len(arr) {
+		return -1
+	}
+	return arr[index]
+}
+
+func Set(arr []int, index, val int) {
+	if index < 0 || index >= len(arr) {
+		return
+	}
+	arr[index] = val
+}
+
+func Max(arr []int) int {
+	max := arr[0]
+	for i := 1; i < len(arr); i++ {
+		if arr[i] > max {
+			max = arr[i]
+		}
+	}
+	return max
+}
+
+func Avg(arr []int) float32 {
+	sum := 0
+	for i := 0; i < len(arr); i++ {
+		sum = sum + arr[i]
+	}
+	return float32(sum) / float32(len(arr))
 }
 
 func linearSearch(arr []int, ele int) int {
