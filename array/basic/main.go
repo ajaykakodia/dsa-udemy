@@ -32,6 +32,21 @@ func main() {
 	fmt.Println(arr)
 	RShift(arr, 8)
 	fmt.Println(arr)
+
+	arr = []int{3, 5, 7, 9, 10, 15, 17, 19}
+	fmt.Printf("Is array %v Sorted: %v\n", arr, isArraySorted(arr))
+
+	arr = []int{3, 5, 7, 9, 10, 8, 17, 19}
+	fmt.Printf("Is array %v Sorted: %v\n", arr, isArraySorted(arr))
+}
+
+func isArraySorted(arr []int) bool {
+	for i := 1; i < len(arr); i++ {
+		if arr[i-1] > arr[i] {
+			return false
+		}
+	}
+	return true
 }
 
 func reverse(arr []int) {
