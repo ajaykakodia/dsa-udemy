@@ -8,6 +8,10 @@ func main() {
 	fmt.Println(changingCase("DaKu Dada"))
 	fmt.Printf("Vowel Counts: %d\n", countVowels("Yaku is a very bad charactEr."))
 	fmt.Printf("Words Counts: %d\n", countWords("Yaku is a very   bad  charactEr."))
+	fmt.Printf("Is string Palindrome: %v\n", checkingPalindrome("madam"))
+	fmt.Printf("Is string Palindrome: %v\n", checkingPalindrome("madamam"))
+	fmt.Printf("Is duplicate char in string: %v\n", findDuplicateInStringByBitwise("findings"))
+	fmt.Printf("Is duplicate char in string: %v\n", findDuplicateInStringByBitwise("findegs"))
 }
 
 func changingCase(str string) string {
@@ -47,4 +51,30 @@ func countWords(str string) int {
 		}
 	}
 	return count + 1
+}
+
+func checkingPalindrome(str string) bool {
+	i, j := 0, len(str)-1
+	for i < j {
+		if str[i] != str[j] {
+			return false
+		}
+		i++
+		j--
+	}
+	return true
+}
+
+func findDuplicateInStringByBitwise(str string) bool {
+	h, x := int64(0), int64(0)
+	for i := 0; i < len(str); i++ {
+		x = 1
+		bitToMove := str[i] - 97
+		x = x << bitToMove
+		if h&x > 0 {
+			return true
+		}
+		h = x | h
+	}
+	return false
 }
