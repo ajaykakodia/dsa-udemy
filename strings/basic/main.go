@@ -7,6 +7,7 @@ import (
 func main() {
 	fmt.Println(changingCase("DaKu Dada"))
 	fmt.Printf("Vowel Counts: %d\n", countVowels("Yaku is a very bad charactEr."))
+	fmt.Printf("Words Counts: %d\n", countWords("Yaku is a very   bad  charactEr."))
 }
 
 func changingCase(str string) string {
@@ -33,4 +34,17 @@ func countVowels(str string) int {
 		}
 	}
 	return count
+}
+
+func countWords(str string) int {
+	if str == "" {
+		return 0
+	}
+	count := 0
+	for i := 0; i < len(str); i++ {
+		if str[i] == ' ' && str[i-1] != ' ' {
+			count++
+		}
+	}
+	return count + 1
 }
