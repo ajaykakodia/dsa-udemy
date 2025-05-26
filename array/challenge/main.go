@@ -24,12 +24,29 @@ func main() {
 	res = findDuplicateElementInUnSortedArray1(arr)
 	fmt.Println("Duplicate Numbers:", res)
 
-	arr = []int{6, 3, 8, 10, 16, 7, 5, 2, 9, 14, 1}
+	arr = []int{1, 3, 4, 5, 6, 8, 9, 10, 12, 14}
+	sortedSumArray(arr, 10)
+
+	arr = []int{6, 3, 8, 10, 16, 7, 5, 2, 9, 14}
 	sumPair(arr, 10)
 	sumPair1(arr, 10)
 
-	arr = []int{1, 3, 4, 5, 6, 8, 9, 10, 12, 14}
-	sortedSumArray(arr, 10)
+	max, min := maxNMinInSingleRun(arr)
+	fmt.Printf("max: %v, min: %v in array: %v", max, min, arr)
+}
+
+func maxNMinInSingleRun(arr []int) (int, int) {
+	max, min := arr[0], arr[0]
+
+	for i := 1; i < len(arr); i++ {
+		if arr[i] > max {
+			max = arr[i]
+		} else if arr[i] < min {
+			min = arr[i]
+		}
+	}
+
+	return max, min
 }
 
 func sumPair(arr []int, sum int) {
