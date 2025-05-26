@@ -3,21 +3,19 @@ package main
 import "fmt"
 
 type diagonalMatrix struct {
-	arr []int
-	row int
-	col int
+	arr  []int
+	size int
 }
 
-func NewDiagonalMatrix(row, col int) *diagonalMatrix {
+func NewDiagonalMatrix(size int) *diagonalMatrix {
 	return &diagonalMatrix{
-		arr: make([]int, row),
-		row: row,
-		col: col,
+		arr:  make([]int, size),
+		size: size,
 	}
 }
 
 func (d *diagonalMatrix) Get(row, col int) int {
-	if row > d.row && col > d.col {
+	if row > d.size && col > d.size {
 		return 0
 	}
 	if row == col {
@@ -27,7 +25,7 @@ func (d *diagonalMatrix) Get(row, col int) int {
 }
 
 func (d *diagonalMatrix) Set(row, col, val int) {
-	if row > d.row && col > d.col {
+	if row > d.size && col > d.size {
 		return
 	}
 	if row == col {
@@ -36,8 +34,8 @@ func (d *diagonalMatrix) Set(row, col, val int) {
 }
 
 func (d *diagonalMatrix) Display() {
-	for i := 0; i < d.row; i++ {
-		for j := 0; j < d.col; j++ {
+	for i := 0; i < d.size; i++ {
+		for j := 0; j < d.size; j++ {
 			if j == i {
 				fmt.Printf("%d ", d.arr[i])
 			} else {
@@ -49,7 +47,7 @@ func (d *diagonalMatrix) Display() {
 }
 
 func main() {
-	dm := NewDiagonalMatrix(5, 5)
+	dm := NewDiagonalMatrix(5)
 	dm.Display()
 	println("--------------------------")
 	dm.Set(0, 0, 8)
