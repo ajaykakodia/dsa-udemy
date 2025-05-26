@@ -12,6 +12,8 @@ func main() {
 	fmt.Printf("Is string Palindrome: %v\n", checkingPalindrome("madamam"))
 	fmt.Printf("Is duplicate char in string: %v\n", findDuplicateInStringByBitwise("findings"))
 	fmt.Printf("Is duplicate char in string: %v\n", findDuplicateInStringByBitwise("findegs"))
+	fmt.Printf("Is strings are anagram: %v\n", isStringsAreAnagram("decimal", "medical"))
+	fmt.Printf("Is strings are anagram: %v\n", isStringsAreAnagram("decimal", "medicallly"))
 }
 
 func changingCase(str string) string {
@@ -77,4 +79,24 @@ func findDuplicateInStringByBitwise(str string) bool {
 		h = x | h
 	}
 	return false
+}
+
+func isStringsAreAnagram(str1, str2 string) bool {
+	if len(str1) != len(str2) {
+		return false
+	}
+	h, x := 0, 0
+	for i := 0; i < len(str1); i++ {
+		x = 1
+		x = x << (str1[i] - 97)
+		h = h | x
+	}
+
+	for i := 0; i < len(str2); i++ {
+		x = 1
+		x = x << (str2[i] - 97)
+		h = h & x
+	}
+
+	return h == 0
 }
