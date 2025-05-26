@@ -6,6 +6,7 @@ import (
 
 func main() {
 	fmt.Println(changingCase("DaKu Dada"))
+	fmt.Printf("Vowel Counts: %d\n", countVowels("Yaku is a very bad charactEr."))
 }
 
 func changingCase(str string) string {
@@ -21,4 +22,15 @@ func changingCase(str string) string {
 	}
 
 	return changeCase
+}
+
+func countVowels(str string) int {
+	vowels := map[int]bool{'a': true, 'A': true, 'e': true, 'E': true, 'i': true, 'I': true, 'o': true, 'O': true, 'u': true, 'U': true}
+	count := 0
+	for i := 0; i < len(str); i++ {
+		if vowels[int(str[i])] {
+			count++
+		}
+	}
+	return count
 }
