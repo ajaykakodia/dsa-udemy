@@ -23,6 +23,49 @@ func main() {
 	arr = []int{8, 3, 6, 4, 6, 5, 6, 8, 2, 7}
 	res = findDuplicateElementInUnSortedArray1(arr)
 	fmt.Println("Duplicate Numbers:", res)
+
+	arr = []int{6, 3, 8, 10, 16, 7, 5, 2, 9, 14, 1}
+	sumPair(arr, 10)
+	sumPair1(arr, 10)
+
+	arr = []int{1, 3, 4, 5, 6, 8, 9, 10, 12, 14}
+	sortedSumArray(arr, 10)
+}
+
+func sumPair(arr []int, sum int) {
+	m := make(map[int]int)
+	for i := 0; i < len(arr); i++ {
+		if val, ok := m[arr[i]]; ok {
+			fmt.Printf("Sum of %v at index %v and %v at index %v is %v\n", arr[val], val, arr[i], i, sum)
+		} else {
+			m[sum-arr[i]] = i
+		}
+	}
+}
+
+func sumPair1(arr []int, sum int) {
+	for i := 0; i < len(arr)-1; i++ {
+		for j := i + 1; j < len(arr); j++ {
+			if arr[i]+arr[j] == sum {
+				fmt.Printf("Sum of %v at index %v and %v at index %v is %v\n", arr[i], i, arr[j], j, sum)
+			}
+		}
+	}
+}
+
+func sortedSumArray(arr []int, sum int) {
+	i, j := 0, len(arr)-1
+	for i < j {
+		if arr[i]+arr[j] > sum {
+			j--
+		} else if arr[i]+arr[j] < sum {
+			i++
+		} else {
+			fmt.Printf("Sum of %v at index %v and %v at index %v is %v\n", arr[i], i, arr[j], j, sum)
+			i++
+			j--
+		}
+	}
 }
 
 func findMissingElements(arr []int) int {
