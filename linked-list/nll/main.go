@@ -64,7 +64,7 @@ func RInsert(cn *node, data, index int) *node {
 }
 
 func (ll *linkedList) Insert(data, index int) {
-	if index > ll.Len {
+	if index > ll.Count() {
 		return
 	}
 	ll.Len++
@@ -167,6 +167,33 @@ func insertInSortedLinkedList(first *node, data int) {
 	pn.Next = &cd
 }
 
+func isListSorted(cn *node) bool {
+	if cn == nil {
+		return true
+	}
+	for cn.Next != nil {
+		if cn.Data > cn.Next.Data {
+			return false
+		}
+		cn = cn.Next
+	}
+	return true
+}
+
+func removeDuplicateFromSortedLinkList(first *node) {
+	pn := first
+	cn := first.Next
+	for cn != nil {
+		if pn.Data == cn.Data {
+			pn.Next = cn.Next
+			cn = cn.Next
+		} else {
+			pn = cn
+			cn = cn.Next
+		}
+	}
+}
+
 func main() {
 	ll := createLinkedList([]int{3, 6, 4, 8, 10, 14, 17})
 	ll.Display()
@@ -209,4 +236,12 @@ func main() {
 	insertInSortedLinkedList(ll4.First, 12)
 	insertInSortedLinkedList(ll4.First, 21)
 	ll4.Display()
+	fmt.Println("Is ll4 Sorted: ", isListSorted(ll4.First))
+	ll4.Insert(13, 8)
+	ll4.Display()
+	fmt.Println("Is ll4 Now Sorted: ", isListSorted(ll4.First))
+	ll5 := createLinkedList([]int{2, 4, 4, 8, 10, 10, 10, 17, 17, 17, 17})
+	ll5.Display()
+	removeDuplicateFromSortedLinkList(ll5.First)
+	ll5.Display()
 }
