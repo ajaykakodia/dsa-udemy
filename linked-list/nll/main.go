@@ -84,6 +84,35 @@ func (ll *linkedList) Insert(data, index int) {
 	}
 }
 
+func (ll *linkedList) Delete(index int) {
+	if index >= ll.Len || ll.First == nil {
+		return
+	}
+	ll.Len--
+
+	if index == 0 {
+		ll.First = ll.First.Next
+	} else {
+		var pn *node
+		cn := ll.First
+		for i := 0; i < index; i++ {
+			pn = cn
+			cn = cn.Next
+		}
+		pn.Next = cn.Next
+	}
+}
+
+func RDelete(cn *node, index int) *node {
+	if index == 0 {
+		return cn.Next
+	}
+	if cn.Next != nil {
+		cn.Next = RDelete(cn.Next, index-1)
+	}
+	return cn
+}
+
 func (ll *linkedList) Count() int {
 	cn := ll.First
 	count := 0
@@ -104,7 +133,6 @@ func RCount(cn *node) int {
 func main() {
 	ll := createLinkedList([]int{3, 6, 4, 8, 10, 14, 17})
 	ll.Display()
-	// RDisplay(ll.First)
 	ll2 := linkedList{}
 	ll2.Insert(2, 0)
 	ll2.Insert(3, 1)
@@ -119,7 +147,19 @@ func main() {
 	ll3.First = RInsert(ll3.First, 7, 3)
 	ll3.First = RInsert(ll3.First, 1, 2)
 	ll3.First = RInsert(ll3.First, 10, 3)
-	ll3.Display()
+	RDisplay(ll3.First)
 	fmt.Println("Number of Node in Linked List 1:", ll.Count())
 	fmt.Println("Number of Node in Linked List 3:", RCount(ll3.First))
+	ll.Delete(4)
+	ll.Display()
+	ll.Delete(5)
+	ll.Display()
+	ll.Delete(5)
+	ll.Display()
+	ll3.First = RDelete(ll3.First, 2)
+	ll3.Display()
+	ll3.First = RDelete(ll3.First, 4)
+	ll3.Display()
+	ll3.First = RDelete(ll3.First, 5)
+	ll3.Display()
 }
