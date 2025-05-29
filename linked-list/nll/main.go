@@ -84,6 +84,23 @@ func (ll *linkedList) Insert(data, index int) {
 	}
 }
 
+func (ll *linkedList) Count() int {
+	cn := ll.First
+	count := 0
+	for cn != nil {
+		count++
+		cn = cn.Next
+	}
+	return count
+}
+
+func RCount(cn *node) int {
+	if cn == nil {
+		return 0
+	}
+	return 1 + RCount(cn.Next)
+}
+
 func main() {
 	ll := createLinkedList([]int{3, 6, 4, 8, 10, 14, 17})
 	ll.Display()
@@ -103,4 +120,6 @@ func main() {
 	ll3.First = RInsert(ll3.First, 1, 2)
 	ll3.First = RInsert(ll3.First, 10, 3)
 	ll3.Display()
+	fmt.Println("Number of Node in Linked List 1:", ll.Count())
+	fmt.Println("Number of Node in Linked List 3:", RCount(ll3.First))
 }
