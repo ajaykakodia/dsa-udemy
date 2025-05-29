@@ -123,6 +123,29 @@ func (ll *linkedList) Count() int {
 	return count
 }
 
+func (ll *linkedList) Search(item int) int {
+	cn := ll.First
+	pos := 0
+	for cn != nil {
+		if cn.Data == item {
+			return pos
+		}
+		cn = cn.Next
+		pos++
+	}
+	return -1
+}
+
+func (ll *linkedList) Sum() int {
+	cn := ll.First
+	sum := 0
+	for cn != nil {
+		sum += cn.Data
+		cn = cn.Next
+	}
+	return sum
+}
+
 func RCount(cn *node) int {
 	if cn == nil {
 		return 0
@@ -162,4 +185,7 @@ func main() {
 	ll3.Display()
 	ll3.First = RDelete(ll3.First, 5)
 	ll3.Display()
+	fmt.Println("Number 5 found in ll1: ", ll.Search(8) != -1)
+	fmt.Println("Number 17 found in ll3: ", ll3.Search(17) != -1)
+	fmt.Println("Sum of all element of ll2: ", ll2.Sum())
 }
