@@ -180,7 +180,7 @@ func isListSorted(cn *node) bool {
 	return true
 }
 
-func removeDuplicateFromSortedLinkList(first *node) {
+func removeDuplicateFromSortedLinkedList(first *node) {
 	pn := first
 	cn := first.Next
 	for cn != nil {
@@ -194,21 +194,21 @@ func removeDuplicateFromSortedLinkList(first *node) {
 	}
 }
 
-func rRemoveDuplicateFromSortedLinkList(currentNode *node) *node {
+func rRemoveDuplicateFromSortedLinkedList(currentNode *node) *node {
 	if currentNode.Next == nil {
 		return currentNode
 	}
 	if currentNode.Data == currentNode.Next.Data {
 		currentNode.Next = currentNode.Next.Next
-		return rRemoveDuplicateFromSortedLinkList(currentNode)
+		return rRemoveDuplicateFromSortedLinkedList(currentNode)
 	}
 	if currentNode.Next != nil {
-		currentNode.Next = rRemoveDuplicateFromSortedLinkList(currentNode.Next)
+		currentNode.Next = rRemoveDuplicateFromSortedLinkedList(currentNode.Next)
 	}
 	return currentNode
 }
 
-func reverseLinkList(first *node) *node {
+func reverseLinkedList(first *node) *node {
 	var ppn, pn *node
 	cn := first
 	for cn != nil {
@@ -227,6 +227,49 @@ func concatenatingTwoLinkedList(first, second *node) {
 		first = first.Next
 	}
 	pn.Next = second
+}
+
+func mergingTwoLinkedList(first, second *node) *node {
+	var firstNode, third *node
+
+	for first != nil && second != nil {
+		if first.Data < second.Data {
+			if third == nil {
+				third = &node{
+					Data: first.Data,
+				}
+				firstNode = third
+			} else {
+				nn := node{
+					Data: first.Data,
+				}
+				third.Next = &nn
+				third = third.Next
+			}
+			first = first.Next
+		} else {
+			if third == nil {
+				third = &node{
+					Data: second.Data,
+				}
+				firstNode = third
+			} else {
+				nn := node{
+					Data: second.Data,
+				}
+				third.Next = &nn
+				third = third.Next
+			}
+			second = second.Next
+		}
+	}
+	if first != nil {
+		third.Next = first
+	}
+	if second != nil {
+		third.Next = second
+	}
+	return firstNode
 }
 
 func main() {
@@ -277,14 +320,18 @@ func main() {
 	fmt.Println("Is ll4 Now Sorted: ", isListSorted(ll4.First))
 	ll5 := createLinkedList([]int{2, 4, 4, 8, 10, 10, 10, 17, 17, 17, 17})
 	ll5.Display()
-	removeDuplicateFromSortedLinkList(ll5.First)
+	removeDuplicateFromSortedLinkedList(ll5.First)
 	ll5.Display()
 	ll5 = createLinkedList([]int{2, 4, 4, 8, 10, 10, 10, 17, 17, 17, 17})
 	ll5.Display()
-	ll5.First = rRemoveDuplicateFromSortedLinkList(ll5.First)
+	ll5.First = rRemoveDuplicateFromSortedLinkedList(ll5.First)
 	ll5.Display()
-	ll5.First = reverseLinkList(ll5.First)
+	ll5.First = reverseLinkedList(ll5.First)
 	ll5.Display()
 	concatenatingTwoLinkedList(ll5.First, ll2.First)
 	ll5.Display()
+	ll6 := createLinkedList([]int{2, 6, 8, 10, 17})
+	ll7 := createLinkedList([]int{1, 7, 9, 12, 19, 21, 23})
+	ll6.First = mergingTwoLinkedList(ll6.First, ll7.First)
+	ll6.Display()
 }
