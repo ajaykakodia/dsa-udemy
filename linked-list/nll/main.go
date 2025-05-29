@@ -208,6 +208,27 @@ func rRemoveDuplicateFromSortedLinkList(currentNode *node) *node {
 	return currentNode
 }
 
+func reverseLinkList(first *node) *node {
+	var ppn, pn *node
+	cn := first
+	for cn != nil {
+		ppn = pn
+		pn = cn
+		cn = cn.Next
+		pn.Next = ppn
+	}
+	return pn
+}
+
+func concatenatingTwoLinkedList(first, second *node) {
+	var pn *node
+	for first != nil {
+		pn = first
+		first = first.Next
+	}
+	pn.Next = second
+}
+
 func main() {
 	ll := createLinkedList([]int{3, 6, 4, 8, 10, 14, 17})
 	ll.Display()
@@ -261,5 +282,9 @@ func main() {
 	ll5 = createLinkedList([]int{2, 4, 4, 8, 10, 10, 10, 17, 17, 17, 17})
 	ll5.Display()
 	ll5.First = rRemoveDuplicateFromSortedLinkList(ll5.First)
+	ll5.Display()
+	ll5.First = reverseLinkList(ll5.First)
+	ll5.Display()
+	concatenatingTwoLinkedList(ll5.First, ll2.First)
 	ll5.Display()
 }
