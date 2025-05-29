@@ -42,7 +42,17 @@ func (ll *linkedList) Display() {
 	fmt.Println("Nil")
 }
 
+func RDisplay(first *node) {
+	if first == nil {
+		fmt.Println("Nil")
+		return
+	}
+	fmt.Printf("%d -> ", first.Data)
+	RDisplay(first.Next)
+}
+
 func main() {
 	ll := createLinkedList([]int{3, 6, 4, 8, 10, 14, 17})
 	ll.Display()
+	RDisplay(ll.First)
 }
