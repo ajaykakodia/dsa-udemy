@@ -194,6 +194,20 @@ func removeDuplicateFromSortedLinkList(first *node) {
 	}
 }
 
+func rRemoveDuplicateFromSortedLinkList(currentNode *node) *node {
+	if currentNode.Next == nil {
+		return currentNode
+	}
+	if currentNode.Data == currentNode.Next.Data {
+		currentNode.Next = currentNode.Next.Next
+		return rRemoveDuplicateFromSortedLinkList(currentNode)
+	}
+	if currentNode.Next != nil {
+		currentNode.Next = rRemoveDuplicateFromSortedLinkList(currentNode.Next)
+	}
+	return currentNode
+}
+
 func main() {
 	ll := createLinkedList([]int{3, 6, 4, 8, 10, 14, 17})
 	ll.Display()
@@ -243,5 +257,9 @@ func main() {
 	ll5 := createLinkedList([]int{2, 4, 4, 8, 10, 10, 10, 17, 17, 17, 17})
 	ll5.Display()
 	removeDuplicateFromSortedLinkList(ll5.First)
+	ll5.Display()
+	ll5 = createLinkedList([]int{2, 4, 4, 8, 10, 10, 10, 17, 17, 17, 17})
+	ll5.Display()
+	ll5.First = rRemoveDuplicateFromSortedLinkList(ll5.First)
 	ll5.Display()
 }
