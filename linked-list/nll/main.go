@@ -153,6 +153,20 @@ func RCount(cn *node) int {
 	return 1 + RCount(cn.Next)
 }
 
+func insertInSortedLinkedList(first *node, data int) {
+	cn := first
+	cd := node{
+		Data: data,
+	}
+	var pn *node
+	for cn != nil && cn.Data < data {
+		pn = cn
+		cn = cn.Next
+	}
+	cd.Next = cn
+	pn.Next = &cd
+}
+
 func main() {
 	ll := createLinkedList([]int{3, 6, 4, 8, 10, 14, 17})
 	ll.Display()
@@ -188,4 +202,11 @@ func main() {
 	fmt.Println("Number 5 found in ll1: ", ll.Search(8) != -1)
 	fmt.Println("Number 17 found in ll3: ", ll3.Search(17) != -1)
 	fmt.Println("Sum of all element of ll2: ", ll2.Sum())
+
+	ll4 := createLinkedList([]int{2, 4, 8, 10, 17})
+	ll4.Display()
+	insertInSortedLinkedList(ll4.First, 9)
+	insertInSortedLinkedList(ll4.First, 12)
+	insertInSortedLinkedList(ll4.First, 21)
+	ll4.Display()
 }
