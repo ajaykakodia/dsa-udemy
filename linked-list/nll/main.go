@@ -272,6 +272,25 @@ func mergingTwoLinkedList(first, second *node) *node {
 	return firstNode
 }
 
+func isLoopInLinkedList(first *node) bool {
+	if first == nil || first.Next == nil {
+		return false
+	}
+	slowNode := first
+	fastNode := first.Next
+	for slowNode != nil && fastNode != nil {
+		if slowNode == fastNode {
+			return true
+		}
+		slowNode = slowNode.Next
+		if fastNode.Next == nil {
+			return false
+		}
+		fastNode = fastNode.Next.Next
+	}
+	return false
+}
+
 func main() {
 	ll := createLinkedList([]int{3, 6, 4, 8, 10, 14, 17})
 	ll.Display()
@@ -334,4 +353,12 @@ func main() {
 	ll7 := createLinkedList([]int{1, 7, 9, 12, 19, 21, 23})
 	ll6.First = mergingTwoLinkedList(ll6.First, ll7.First)
 	ll6.Display()
+	loopNode := ll6.First.Next.Next
+	lastNode := ll6.First
+	for lastNode.Next != nil {
+		lastNode = lastNode.Next
+	}
+	lastNode.Next = loopNode
+	fmt.Printf("Is loop exists in current linked list:%v\n", isLoopInLinkedList(ll6.First))
+	fmt.Printf("Is loop exists in current linked list:%v\n", isLoopInLinkedList(ll5.First))
 }
